@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24299" systemVersion="25D2128" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="AudioFileMO" representedClassName="AudioFileMO" syncable="YES"/>
+    <entity name="ExampleSentenceMO" representedClassName="ExampleSentenceMO" syncable="YES">
+        <attribute name="content" attributeType="String" defaultValueString=""/>
+        <relationship name="audioFile" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AudioFileMO"/>
+        <fetchIndex name="contentIndex">
+            <fetchIndexElement property="content" type="Binary" order="ascending"/>
+        </fetchIndex>
+    </entity>
+    <entity name="LearningWordMO" representedClassName="LearningWordMO" syncable="YES">
+        <attribute name="learningScore" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mistackCount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="trunIndex" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="learnPlan" maxCount="1" deletionRule="Nullify" destinationEntity="WordLearnPlanMO" inverseName="words" inverseEntity="WordLearnPlanMO"/>
+        <relationship name="word" maxCount="1" deletionRule="Nullify" destinationEntity="WordMO"/>
+    </entity>
+    <entity name="LearningWrodGroupMO" representedClassName="LearningWrodGroupMO" syncable="YES">
+        <relationship name="learnPlan" maxCount="1" deletionRule="Nullify" destinationEntity="WordLearnPlanMO" inverseName="learningGroup" inverseEntity="WordLearnPlanMO"/>
+        <relationship name="learnWords" toMany="YES" deletionRule="Nullify" destinationEntity="LearningWordMO"/>
+        <relationship name="reviewWords" toMany="YES" deletionRule="Nullify" destinationEntity="LearningWordMO"/>
+    </entity>
+    <entity name="PronunciationMO" representedClassName="PronunciationMO" syncable="YES">
+        <attribute name="ipa" optional="YES" attributeType="String"/>
+        <attribute name="nation" optional="YES" attributeType="String"/>
+        <relationship name="audioFile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AudioFileMO"/>
+        <fetchIndex name="ipaIndex">
+            <fetchIndexElement property="ipa" type="Binary" order="ascending"/>
+        </fetchIndex>
+    </entity>
+    <entity name="WordLearnPlanMO" representedClassName="WordLearnPlanMO" syncable="YES">
+        <attribute name="lastFinishTurnRaw" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="nextTurnIndex" attributeType="Integer 64" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="preferredLearnCount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="selectedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String" defaultValueString=""/>
+        <relationship name="learningGroup" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="LearningWrodGroupMO" inverseName="learnPlan" inverseEntity="LearningWrodGroupMO"/>
+        <relationship name="words" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="LearningWordMO" inverseName="learnPlan" inverseEntity="LearningWordMO"/>
+    </entity>
+    <entity name="WordMO" representedClassName="WordMO" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="isMastered" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="mistakeCount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="symbol" attributeType="String" defaultValueString=""/>
+        <relationship name="baseFrom" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WordMO"/>
+        <fetchIndex name="symbolIndex">
+            <fetchIndexElement property="symbol" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="masteredIndex">
+            <fetchIndexElement property="isMastered" type="Binary" order="ascending"/>
+        </fetchIndex>
+    </entity>
+</model>
