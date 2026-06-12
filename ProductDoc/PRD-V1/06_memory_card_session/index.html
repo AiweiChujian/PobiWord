@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PRD 06：记忆卡片会话</title>
+  <link rel="stylesheet" href="../assets/prd.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html">Pobi PRD</a>
+      <nav class="doc-nav" aria-label="PRD 文档导航">
+        <a href="../index.html">总览</a><a href="../01_home_plan_dashboard/index.html">01</a><a href="../02_plan_source_selection/index.html">02</a><a href="../03_plan_configuration/index.html">03</a><a href="../04_new_word_batch_selection/index.html">04</a><a href="../05_new_word_learning_card/index.html">05</a><a class="active" href="../06_memory_card_session/index.html">06</a><a href="../07_review_session/index.html">07</a><a href="../08_plan_completion_stats/index.html">08</a><a href="../09_learning_quota_purchase/index.html">09</a><a href="../10_profile/index.html">10</a>
+      </nav>
+    </div>
+  </header>
+  <main class="page">
+    <article class="doc-card">
+      <div class="doc-meta">Pobi APP 产品需求文档</div>
+      <h1>PRD 06：记忆卡片会话</h1>
+<h2>1. 场景定位</h2>
+<p>记忆卡片用于新词学习后或复习中，帮助用户通过随机顺序反复回忆单词。用户通过“忘记、模糊、认识”进行自评，系统据此更新单词在当前会话中的记忆记录。</p>
+<h2>2. 用户目标</h2>
+<ul>
+<li>通过主动回忆巩固单词。</li>
+<li>在不知道时查看释义。</li>
+<li>快速标记已掌握单词，减少重复学习；必要时可以移除已掌握标记。</li>
+</ul>
+<h2>3. 入口</h2>
+<ul>
+<li>新词学习卡片全部呈现完成后进入。</li>
+<li>复习单词会话中复用进入。</li>
+<li>首页“再次复习”入口进入。</li>
+</ul>
+<h2>4. 页面范围</h2>
+<ul>
+<li>当前记忆进度。</li>
+<li>记忆卡片。</li>
+<li>发音入口。</li>
+<li>查看释义入口。</li>
+<li>忘记、模糊、认识三个自评按钮。</li>
+<li>标记为已掌握。</li>
+<li>移除已掌握标记。</li>
+<li>下一个单词按钮。</li>
+<li>会话完成页或返回首页。</li>
+</ul>
+<h2>5. 功能需求</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>编号</th><th>功能</th><th>说明</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>F01</td><td>随机展示单词</td><td>按随机顺序展示记忆列表中的单词。</td><td>P0</td></tr>
+<tr><td>F02</td><td>默认隐藏信息</td><td>除单词本身外，其它信息不主动呈现。</td><td>P0</td></tr>
+<tr><td>F03</td><td>播放发音</td><td>用户可点击播放单词读音。</td><td>P0</td></tr>
+<tr><td>F04</td><td>查看释义</td><td>用户可主动展开释义、词性、例句等信息。</td><td>P0</td></tr>
+<tr><td>F05</td><td>忘记</td><td>单词记忆记录置为 0。</td><td>P0</td></tr>
+<tr><td>F06</td><td>模糊</td><td>不修改单词记忆记录。</td><td>P0</td></tr>
+<tr><td>F07</td><td>认识</td><td>单词记忆记录 +1。</td><td>P0</td></tr>
+<tr><td>F08</td><td>释义后切换</td><td>若释义已展示，自评后直接切换下一个单词。</td><td>P0</td></tr>
+<tr><td>F09</td><td>先展示释义</td><td>若释义未展示，自评后展示释义并呈现“下一个”按钮。</td><td>P0</td></tr>
+<tr><td>F10</td><td>完成本轮记忆</td><td>单词记忆记录达到 3 时，从记忆列表移除。</td><td>P0</td></tr>
+<tr><td>F11</td><td>标记已掌握</td><td>用户可将单词直接标记为已掌握，并从学习/记忆列表移除。</td><td>P0</td></tr>
+<tr><td>F12</td><td>移除已掌握标记</td><td>用户可以移除单词的已掌握标记，移除后该单词不再按已掌握词过滤。</td><td>P1</td></tr>
+<tr><td>F13</td><td>会话完成</td><td>记忆列表为空时完成所有单词记忆。</td><td>P0</td></tr>
+</tbody>
+</table></div>
+<h2>6. 核心算法</h2>
+<h3>6.1 自评处理</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>用户操作</th><th>记忆记录处理</th><th>后续展示</th></tr></thead>
+<tbody>
+<tr><td>忘记</td><td>置为 0</td><td>若释义已展示，切换下一个；否则展示释义和“下一个”按钮。</td></tr>
+<tr><td>模糊</td><td>不处理</td><td>若释义已展示，切换下一个；否则展示释义和“下一个”按钮。</td></tr>
+<tr><td>认识</td><td>+1</td><td>若释义已展示，切换下一个；否则展示释义和“下一个”按钮。</td></tr>
+</tbody>
+</table></div>
+<h3>6.2 下一个单词选择</h3>
+<ol>
+<li>如果记忆列表为空，则完成所有单词的记忆。</li>
+<li>判断当前单词是否还在记忆列表中；在列表中则将其移除。</li>
+<li>移除当前单词后，如果列表为空，则当前单词就是下一个需记忆单词。</li>
+<li>从记忆列表剩余单词中随机挑选一个作为下一个需记忆单词。</li>
+</ol>
+<h2>7. 业务规则</h2>
+<ul>
+<li>记忆记录是当前会话内的计数，达到 3 表示完成本轮记忆。</li>
+<li>标记已掌握后，该单词从当前学习列表和记忆列表移除。</li>
+<li>已掌握单词会在新的学习计划和后续选词中被筛掉。</li>
+<li>用户可以移除已掌握标记；移除后，该单词应按普通未掌握词参与后续计划和选词筛选。</li>
+<li>已掌握单词是 AI 生成例句时的重要参考。</li>
+<li>新词学习和复习都复用同一套记忆卡片交互。</li>
+</ul>
+<h2>8. 状态与异常</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>状态</th><th>页面处理</th></tr></thead>
+<tbody>
+<tr><td>记忆列表为空</td><td>直接进入会话完成状态。</td></tr>
+<tr><td>发音失败</td><td>展示失败提示，支持重试。</td></tr>
+<tr><td>释义内容缺失</td><td>展示内容缺失提示并提供重新生成或跳过。</td></tr>
+<tr><td>用户中途退出</td><td>保存会话状态，返回后可继续。</td></tr>
+<tr><td>标记已掌握误触</td><td>用户可移除已掌握标记，恢复为未掌握状态。</td></tr>
+</tbody>
+</table></div>
+<h2>9. 数据需求</h2>
+<ul>
+<li>会话 ID、计划 ID、批次 ID。</li>
+<li>记忆列表单词 ID。</li>
+<li>当前单词 ID。</li>
+<li>当前单词记忆记录。</li>
+<li>释义是否已展示。</li>
+<li>已掌握状态。</li>
+<li>已掌握标记更新时间与移除状态。</li>
+<li>发音、释义、例句等学习卡片内容。</li>
+</ul>
+<h2>10. 埋点</h2>
+<ul>
+<li><code>memory_session_start</code></li>
+<li><code>memory_card_view</code></li>
+<li><code>memory_card_audio_play</code></li>
+<li><code>memory_card_definition_reveal</code></li>
+<li><code>memory_rate_forgot</code></li>
+<li><code>memory_rate_uncertain</code></li>
+<li><code>memory_rate_known</code></li>
+<li><code>memory_mark_mastered</code></li>
+<li><code>memory_unmark_mastered</code></li>
+<li><code>memory_word_complete</code></li>
+<li><code>memory_session_complete</code></li>
+</ul>
+<h2>11. 验收标准</h2>
+<ul>
+<li>三个自评按钮按规则正确更新记忆记录。</li>
+<li>单词记忆记录达到 3 后从记忆列表移除。</li>
+<li>记忆列表为空时会话完成。</li>
+<li>标记已掌握会同步影响当前会话与后续学习计划筛选。</li>
+<li>移除已掌握标记后，单词不再被已掌握词过滤规则排除。</li>
+</ul>
+      <nav class="doc-footer" aria-label="上下篇导航">
+        <a href="../05_new_word_learning_card/index.html">上一页</a><a href="../07_review_session/index.html">下一页</a>
+      </nav>
+    </article>
+  </main>
+</body>
+</html>

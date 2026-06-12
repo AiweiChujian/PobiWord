@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PRD 10：Profile 与设置</title>
+  <link rel="stylesheet" href="../assets/prd.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html">Pobi PRD</a>
+      <nav class="doc-nav" aria-label="PRD 文档导航">
+        <a href="../index.html">总览</a><a href="../01_home_plan_dashboard/index.html">01</a><a href="../02_plan_source_selection/index.html">02</a><a href="../03_plan_configuration/index.html">03</a><a href="../04_new_word_batch_selection/index.html">04</a><a href="../05_new_word_learning_card/index.html">05</a><a href="../06_memory_card_session/index.html">06</a><a href="../07_review_session/index.html">07</a><a href="../08_plan_completion_stats/index.html">08</a><a href="../09_learning_quota_purchase/index.html">09</a><a class="active" href="../10_profile/index.html">10</a>
+      </nav>
+    </div>
+  </header>
+  <main class="page">
+    <article class="doc-card">
+      <div class="doc-meta">Pobi APP 产品需求文档</div>
+      <h1>PRD 10：Profile 与设置</h1>
+<h2>1. 场景定位</h2>
+<p>Profile 是 Pobi 的个人与设置页面，用于查看用户剩余学习额度、管理每日提醒和基础 APP 设置，并展示版本、协议、隐私等 APP 信息。</p>
+<h2>2. 用户目标</h2>
+<ul>
+<li>查看当前剩余学习额度。</li>
+<li>进入购买或补充学习额度流程。</li>
+<li>开启/关闭每日提醒，并设置唯一的每日提醒时间。</li>
+<li>查看 APP 版本、协议、隐私政策和其它基础信息。</li>
+</ul>
+<h2>3. 入口</h2>
+<ul>
+<li>底部 Tab 或主导航中的 Profile 入口。</li>
+<li>计划配置页的每日提醒设置入口。</li>
+<li>学习额度不足提醒中的购买或查看额度入口。</li>
+</ul>
+<h2>4. 页面范围</h2>
+<ul>
+<li>用户信息区域。</li>
+<li>剩余学习额度展示。</li>
+<li>购买/补充学习额度入口。</li>
+<li>每日提醒开关与提醒时间设置。</li>
+<li>通知权限状态提示。</li>
+<li>APP 设置入口。</li>
+<li>APP 信息：版本号、隐私政策、用户协议、关于 Pobi。</li>
+</ul>
+<h2>5. 功能需求</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>编号</th><th>功能</th><th>说明</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>F01</td><td>用户信息展示</td><td>展示用户昵称、头像或默认身份信息；具体账号体系待后续账号设计补充。</td><td>P1</td></tr>
+<tr><td>F02</td><td>剩余额度展示</td><td>展示用户当前剩余学习额度，单位为单词数。</td><td>P0</td></tr>
+<tr><td>F03</td><td>购买额度入口</td><td>提供购买或补充学习额度入口，进入学习额度购买流程。</td><td>P0</td></tr>
+<tr><td>F04</td><td>每日提醒开关</td><td>用户可开启或关闭每日学习提醒。</td><td>P0</td></tr>
+<tr><td>F05</td><td>每日提醒时间</td><td>每日仅提醒一次，用户可设置一个提醒时间。</td><td>P0</td></tr>
+<tr><td>F06</td><td>通知权限提示</td><td>通知权限未开启时，展示授权引导。</td><td>P0</td></tr>
+<tr><td>F07</td><td>APP 设置</td><td>承接通用设置项，如声音、播放、缓存或其它基础设置；具体设置项可后续扩展。</td><td>P1</td></tr>
+<tr><td>F08</td><td>APP 信息</td><td>展示版本号、隐私政策、用户协议、关于 Pobi 等信息入口。</td><td>P0</td></tr>
+</tbody>
+</table></div>
+<h2>6. 业务规则</h2>
+<ul>
+<li>学习额度按单词数展示，需与选词和购买流程使用同一额度账户。</li>
+<li>每日提醒为全局设置，不绑定单个学习计划。</li>
+<li>每日仅允许一个提醒时间。</li>
+<li>计划配置页点击每日提醒设置入口时，跳转到 Profile 的提醒设置区域。</li>
+<li>通知权限未开启时，用户可保存提醒偏好，但需要引导开启系统通知权限后才可正常提醒。</li>
+</ul>
+<h2>7. 状态与异常</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>状态</th><th>页面处理</th></tr></thead>
+<tbody>
+<tr><td>额度加载失败</td><td>展示失败提示和重试入口。</td></tr>
+<tr><td>剩余额度为 0</td><td>展示 0 额度状态和购买入口。</td></tr>
+<tr><td>通知权限未开启</td><td>展示权限提示，并引导用户开启系统通知权限。</td></tr>
+<tr><td>提醒时间保存失败</td><td>保留原设置，展示失败提示并支持重试。</td></tr>
+<tr><td>APP 信息加载失败</td><td>展示可用信息；不可用项展示失败或稍后再试。</td></tr>
+</tbody>
+</table></div>
+<h2>8. 数据需求</h2>
+<ul>
+<li>用户 ID、昵称、头像或默认身份信息。</li>
+<li>剩余学习额度，单位为单词数。</li>
+<li>每日提醒开启状态。</li>
+<li>每日提醒时间。</li>
+<li>系统通知权限状态。</li>
+<li>APP 版本号、隐私政策链接、用户协议链接、关于信息。</li>
+</ul>
+<h2>9. 埋点</h2>
+<ul>
+<li><code>profile_page_view</code></li>
+<li><code>profile_quota_view</code></li>
+<li><code>profile_quota_purchase_click</code></li>
+<li><code>profile_reminder_toggle</code></li>
+<li><code>profile_reminder_time_set</code></li>
+<li><code>profile_notification_permission_click</code></li>
+<li><code>profile_app_info_click</code></li>
+</ul>
+<h2>10. 验收标准</h2>
+<ul>
+<li>用户可以在 Profile 页面看到剩余学习额度，单位为单词数。</li>
+<li>用户可以从 Profile 进入购买或补充额度流程。</li>
+<li>用户可以开启/关闭每日提醒，并设置唯一的每日提醒时间。</li>
+<li>通知权限未开启时，页面有明确授权提示。</li>
+<li>用户可以查看版本号、隐私政策、用户协议和关于信息入口。</li>
+</ul>
+      <nav class="doc-footer" aria-label="上下篇导航">
+        <a href="../09_learning_quota_purchase/index.html">上一页</a><span></span>
+      </nav>
+    </article>
+  </main>
+</body>
+</html>

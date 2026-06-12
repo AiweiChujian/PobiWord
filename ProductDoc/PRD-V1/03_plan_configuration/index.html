@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PRD 03：学习计划配置</title>
+  <link rel="stylesheet" href="../assets/prd.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html">Pobi PRD</a>
+      <nav class="doc-nav" aria-label="PRD 文档导航">
+        <a href="../index.html">总览</a><a href="../01_home_plan_dashboard/index.html">01</a><a href="../02_plan_source_selection/index.html">02</a><a class="active" href="../03_plan_configuration/index.html">03</a><a href="../04_new_word_batch_selection/index.html">04</a><a href="../05_new_word_learning_card/index.html">05</a><a href="../06_memory_card_session/index.html">06</a><a href="../07_review_session/index.html">07</a><a href="../08_plan_completion_stats/index.html">08</a><a href="../09_learning_quota_purchase/index.html">09</a><a href="../10_profile/index.html">10</a>
+      </nav>
+    </div>
+  </header>
+  <main class="page">
+    <article class="doc-card">
+      <div class="doc-meta">Pobi APP 产品需求文档</div>
+      <h1>PRD 03：学习计划配置</h1>
+<h2>1. 场景定位</h2>
+<p>用户选择学习来源后，需要配置每日学习节奏。系统基于剔除已掌握词后的待学习单词，计算学习压力和预计完成日期。每日提醒为全局设置项，计划配置页仅提供跳转到 Profile 设置中开启或调整提醒的入口。</p>
+<h2>2. 用户目标</h2>
+<ul>
+<li>知道本计划实际需要学习多少单词。</li>
+<li>设置每次新单词学习量。</li>
+<li>了解计划压力和预计完成时间。</li>
+<li>按需跳转到设置中开启或调整每日学习提醒。</li>
+</ul>
+<h2>3. 入口</h2>
+<ul>
+<li>学习计划来源选择页确认后进入。</li>
+<li>后续如支持编辑计划，可从计划设置页进入。</li>
+</ul>
+<h2>4. 页面范围</h2>
+<ul>
+<li>展示来源信息与过滤后的待学词量。</li>
+<li>配置每次新单词学习量。</li>
+<li>展示最大学习压力值预估。</li>
+<li>展示预计完成日期。</li>
+<li>每日提醒设置入口。</li>
+<li>完成计划创建。</li>
+</ul>
+<h2>5. 功能需求</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>编号</th><th>功能</th><th>说明</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>F01</td><td>已掌握词过滤</td><td>基于用户当前已掌握词集合剔除来源词表中的已掌握词。</td><td>P0</td></tr>
+<tr><td>F02</td><td>待学词量展示</td><td>展示过滤后的计划学习词数。</td><td>P0</td></tr>
+<tr><td>F03</td><td>新词学习量配置</td><td>默认值 30，用户可调整。</td><td>P0</td></tr>
+<tr><td>F04</td><td>学习压力预估</td><td>最大学习压力值 = 每次新词学习量 × 5。</td><td>P0</td></tr>
+<tr><td>F05</td><td>预计完成日期</td><td>展示新词完成学习日期与最后复习完成日期。</td><td>P0</td></tr>
+<tr><td>F06</td><td>复习完成日期计算</td><td>最后复习完成日期 = 新词完成后第 13 天。</td><td>P0</td></tr>
+<tr><td>F07</td><td>每日提醒设置入口</td><td>展示每日提醒当前状态，并提供跳转到 Profile 设置页开启提醒或设置提醒时间的入口。</td><td>P1</td></tr>
+<tr><td>F08</td><td>完成创建</td><td>保存计划并回到首页/计划页。</td><td>P0</td></tr>
+</tbody>
+</table></div>
+<h2>6. 业务规则</h2>
+<ul>
+<li>默认每次新单词学习量为 30。</li>
+<li>每次新词学习量必须大于 0。</li>
+<li>最大学习压力值按新词学习量的 5 倍展示，用于让用户理解学习负担。</li>
+<li>新词完成学习日期基于待学词量和每次新词学习量计算。</li>
+<li>最后复习完成日期为新词完成日期后 13 天。</li>
+<li>每日提醒是全局设置，每日仅提醒一次；提醒开关和提醒时间在 Profile 设置页维护。</li>
+<li>计划配置页不直接保存提醒时间，只展示入口和当前提醒状态。</li>
+<li>用户移除某个单词的已掌握标记后，该单词不再从待学词表中过滤。</li>
+<li>若过滤后待学词量为 0，应阻止创建计划，并提示该来源内单词已全部掌握或无可学习单词。</li>
+</ul>
+<h2>7. 状态与异常</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>状态</th><th>页面处理</th></tr></thead>
+<tbody>
+<tr><td>待学词量为 0</td><td>展示说明，引导返回更换单词书。</td></tr>
+<tr><td>新词学习量为空或非法</td><td>禁用完成按钮并提示输入有效数字。</td></tr>
+<tr><td>通知权限未开启</td><td>创建计划可继续；点击提醒设置入口时引导到 Profile 设置页完成授权和提醒时间设置。</td></tr>
+<tr><td>保存失败</td><td>展示失败提示，保留当前配置并支持重试。</td></tr>
+</tbody>
+</table></div>
+<h2>8. 数据需求</h2>
+<ul>
+<li>来源 ID、来源类型、来源名称。</li>
+<li>原始词表数量。</li>
+<li>当前已掌握词数量。</li>
+<li>过滤后待学词表。</li>
+<li>每次新词学习量。</li>
+<li>学习压力预估值。</li>
+<li>新词完成日期、最后复习完成日期。</li>
+<li>每日提醒开启状态与提醒时间，仅用于展示和跳转入口。</li>
+</ul>
+<h2>9. 埋点</h2>
+<ul>
+<li><code>plan_config_page_view</code></li>
+<li><code>plan_new_word_count_change</code></li>
+<li><code>plan_reminder_settings_click</code></li>
+<li><code>plan_create_submit</code></li>
+<li><code>plan_create_success</code></li>
+<li><code>plan_create_fail</code></li>
+</ul>
+<h2>10. 验收标准</h2>
+<ul>
+<li>用户进入页面后可看到过滤后的待学习词量。</li>
+<li>修改新词学习量后，压力预估和预计完成日期同步更新。</li>
+<li>每日提醒入口可跳转到 Profile 设置页；计划配置页不直接保存提醒时间。</li>
+<li>待学词量为 0 或配置非法时无法创建计划。</li>
+<li>创建成功后首页能正确展示新计划状态。</li>
+</ul>
+      <nav class="doc-footer" aria-label="上下篇导航">
+        <a href="../02_plan_source_selection/index.html">上一页</a><a href="../04_new_word_batch_selection/index.html">下一页</a>
+      </nav>
+    </article>
+  </main>
+</body>
+</html>

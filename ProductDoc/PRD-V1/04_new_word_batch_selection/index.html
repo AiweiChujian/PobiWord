@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PRD 04：新词批次选择</title>
+  <link rel="stylesheet" href="../assets/prd.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html">Pobi PRD</a>
+      <nav class="doc-nav" aria-label="PRD 文档导航">
+        <a href="../index.html">总览</a><a href="../01_home_plan_dashboard/index.html">01</a><a href="../02_plan_source_selection/index.html">02</a><a href="../03_plan_configuration/index.html">03</a><a class="active" href="../04_new_word_batch_selection/index.html">04</a><a href="../05_new_word_learning_card/index.html">05</a><a href="../06_memory_card_session/index.html">06</a><a href="../07_review_session/index.html">07</a><a href="../08_plan_completion_stats/index.html">08</a><a href="../09_learning_quota_purchase/index.html">09</a><a href="../10_profile/index.html">10</a>
+      </nav>
+    </div>
+  </header>
+  <main class="page">
+    <article class="doc-card">
+      <div class="doc-meta">Pobi APP 产品需求文档</div>
+      <h1>PRD 04：新词批次选择</h1>
+<h2>1. 场景定位</h2>
+<p>用户从首页进入“学习新单词”后，需要选择本轮要学习的一批单词。系统支持随机、顺序、手选三种方式，并在选词前过滤已掌握单词与校验学习额度。</p>
+<h2>2. 用户目标</h2>
+<ul>
+<li>按默认学习量快速开始学习。</li>
+<li>可选择随机、顺序或手动挑选单词。</li>
+<li>在本轮开始前确认要学习的单词列表。</li>
+<li>在额度不足时知道原因并完成购买或调整。</li>
+</ul>
+<h2>3. 入口</h2>
+<ul>
+<li>首页“学习新单词”入口。</li>
+<li>复习完成后首页展示的“学习新单词”入口。</li>
+</ul>
+<h2>4. 页面范围</h2>
+<ul>
+<li>选择方式：随机、顺序、手选。</li>
+<li>学习量配置。</li>
+<li>候选单词列表。</li>
+<li>已选单词列表。</li>
+<li>学习额度检查与购买提醒。</li>
+<li>开始学习按钮。</li>
+</ul>
+<h2>5. 功能需求</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>编号</th><th>功能</th><th>说明</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>F01</td><td>筛除已掌握单词</td><td>每次进入选词前都从候选列表剔除当前已掌握单词。</td><td>P0</td></tr>
+<tr><td>F02</td><td>学习量展示与调整</td><td>默认读取计划配置，用户可在本页调整本轮自动选词数量。</td><td>P0</td></tr>
+<tr><td>F03</td><td>随机选词</td><td>从候选单词中随机选择指定数量。</td><td>P0</td></tr>
+<tr><td>F04</td><td>顺序选词</td><td>按单词书顺序选择指定数量。</td><td>P0</td></tr>
+<tr><td>F05</td><td>手动选词</td><td>用户可自由勾选候选单词，学习量配置不限制手选数量。</td><td>P0</td></tr>
+<tr><td>F06</td><td>额度检查</td><td>开始学习前按本轮选中单词数检查是否还有学习额度。</td><td>P0</td></tr>
+<tr><td>F07</td><td>额度不足提醒</td><td>额度不足时提醒用户购买，不进入学习卡片。</td><td>P0</td></tr>
+<tr><td>F08</td><td>开始学习</td><td>确认后创建本轮新词批次并进入学习卡片。</td><td>P0</td></tr>
+</tbody>
+</table></div>
+<h2>6. 业务规则</h2>
+<ul>
+<li>自动选择方式受“本轮学习量”约束。</li>
+<li>手选方式不受学习量配置约束。</li>
+<li>学习量配置在本页调整后，仅影响本轮，不回写计划配置。</li>
+<li>开始学习前必须完成学习额度校验；V1 学习额度按单词数计费。</li>
+<li>如果候选单词不足学习量，自动选择全部剩余候选词。</li>
+<li>已掌握单词不得进入本轮学习批次。</li>
+<li>用户移除某个单词的已掌握标记后，该单词可重新进入候选列表。</li>
+</ul>
+<h2>7. 状态与异常</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>状态</th><th>页面处理</th></tr></thead>
+<tbody>
+<tr><td>无候选单词</td><td>展示无可学习新词，引导返回首页或进入复习。</td></tr>
+<tr><td>自动选词结果为空</td><td>提示无可选单词。</td></tr>
+<tr><td>手选未选择单词</td><td>禁用开始学习按钮。</td></tr>
+<tr><td>额度不足</td><td>展示购买提醒弹窗或跳转购买页。</td></tr>
+<tr><td>创建批次失败</td><td>展示失败提示并支持重试。</td></tr>
+</tbody>
+</table></div>
+<h2>8. 数据需求</h2>
+<ul>
+<li>计划 ID。</li>
+<li>候选未学习单词列表。</li>
+<li>用户当前已掌握单词集合。</li>
+<li>本轮学习量。</li>
+<li>选择方式。</li>
+<li>本轮已选单词 ID 列表。</li>
+<li>用户剩余学习额度。</li>
+<li>本轮预计消耗额度，等于本轮已选单词数。</li>
+</ul>
+<h2>9. 埋点</h2>
+<ul>
+<li><code>new_word_batch_page_view</code></li>
+<li><code>new_word_select_mode_change</code></li>
+<li><code>new_word_batch_count_change</code></li>
+<li><code>new_word_manual_select</code></li>
+<li><code>learning_quota_check</code></li>
+<li><code>learning_quota_insufficient</code></li>
+<li><code>new_word_batch_start</code></li>
+</ul>
+<h2>10. 验收标准</h2>
+<ul>
+<li>随机、顺序、手选三种方式均可生成有效学习列表。</li>
+<li>已掌握单词不会出现在候选或已选列表中。</li>
+<li>手选数量可超过计划配置的新词学习量。</li>
+<li>额度校验按本轮实际选择的单词数计算。</li>
+<li>额度不足时无法开始学习，并展示明确购买引导。</li>
+</ul>
+      <nav class="doc-footer" aria-label="上下篇导航">
+        <a href="../03_plan_configuration/index.html">上一页</a><a href="../05_new_word_learning_card/index.html">下一页</a>
+      </nav>
+    </article>
+  </main>
+</body>
+</html>

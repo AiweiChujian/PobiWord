@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PRD 01：首页与计划状态</title>
+  <link rel="stylesheet" href="../assets/prd.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html">Pobi PRD</a>
+      <nav class="doc-nav" aria-label="PRD 文档导航">
+        <a href="../index.html">总览</a><a class="active" href="../01_home_plan_dashboard/index.html">01</a><a href="../02_plan_source_selection/index.html">02</a><a href="../03_plan_configuration/index.html">03</a><a href="../04_new_word_batch_selection/index.html">04</a><a href="../05_new_word_learning_card/index.html">05</a><a href="../06_memory_card_session/index.html">06</a><a href="../07_review_session/index.html">07</a><a href="../08_plan_completion_stats/index.html">08</a><a href="../09_learning_quota_purchase/index.html">09</a><a href="../10_profile/index.html">10</a>
+      </nav>
+    </div>
+  </header>
+  <main class="page">
+    <article class="doc-card">
+      <div class="doc-meta">Pobi APP 产品需求文档</div>
+      <h1>PRD 01：首页与计划状态</h1>
+<h2>1. 场景定位</h2>
+<p>首页是用户进入 Pobi 后的主场景，也是其它 V1 功能的分发入口。V1 允许同时存在多个学习计划，但首页只展示最近选中的计划，并根据该计划状态展示创建/新增学习计划、选择其它计划、学习新单词、复习、再次复习或完成统计等直接入口；部分入口会间接进入单词书选择、计划配置、新词批次选择、学习卡片和记忆卡片等后续页面。</p>
+<h2>2. 用户目标</h2>
+<ul>
+<li>一眼知道今天应该做什么，以及下一步会进入哪个学习流程。</li>
+<li>在有复习任务时优先完成复习。</li>
+<li>在复习完成后继续学习新词或再次复习。</li>
+<li>在多个计划之间切换，并让首页展示最近选中的计划。</li>
+<li>在无计划或允许新增计划时进入创建/新增学习计划流程。</li>
+<li>在计划完成后查看结果。</li>
+</ul>
+<h2>3. 入口</h2>
+<ul>
+<li>APP 启动后默认进入。</li>
+<li>底部 Tab 或主导航中的首页入口。</li>
+<li>创建学习计划完成后返回。</li>
+<li>学习、复习、记忆会话完成后返回。</li>
+</ul>
+<h2>4. 页面范围</h2>
+<ul>
+<li>学习计划卡片。</li>
+<li>当前选中计划展示。</li>
+<li>计划选择/切换入口。</li>
+<li>今日操作入口。</li>
+<li>创建/新增学习计划入口。</li>
+<li>学习、复习、完成统计等状态入口。</li>
+<li>学习进度概览。</li>
+<li>计划完成状态入口或统计占位视图。</li>
+</ul>
+<h2>5. 功能需求</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>编号</th><th>功能</th><th>说明</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>F01</td><td>无计划状态</td><td>用户无计划时展示创建学习计划入口，点击后进入学习计划来源选择。</td><td>P0</td></tr>
+<tr><td>F02</td><td>计划基础信息</td><td>展示计划名称、来源、待学进度、复习进度。</td><td>P0</td></tr>
+<tr><td>F03</td><td>新计划入口状态</td><td>无学习记录的计划仅展示“学习新单词”入口。</td><td>P0</td></tr>
+<tr><td>F04</td><td>复习优先状态</td><td>每次学习新单词之后，首页先只展示复习入口。</td><td>P0</td></tr>
+<tr><td>F05</td><td>复习完成状态</td><td>完成复习后，同时展示“再次复习”和“学习新单词”入口。</td><td>P0</td></tr>
+<tr><td>F06</td><td>新词学完状态</td><td>所有单词已添加学习后，仅展示复习入口。</td><td>P0</td></tr>
+<tr><td>F07</td><td>计划完成状态</td><td>所有单词复习完成后，展示学习计划完成状态；统计页面和内容待定时展示占位视图。</td><td>P0</td></tr>
+<tr><td>F08</td><td>多计划展示</td><td>允许同时存在多个学习计划；首页只展示最近选中的计划，并提供计划选择和新增计划入口。</td><td>P0</td></tr>
+<tr><td>F09</td><td>入口分发</td><td>根据计划状态，将用户分发到创建计划、学习新词、复习、再次复习或完成统计。</td><td>P0</td></tr>
+</tbody>
+</table></div>
+<h2>6. 首页状态规则</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>计划状态</th><th>操作入口</th></tr></thead>
+<tbody>
+<tr><td>无学习计划</td><td>创建学习计划</td></tr>
+<tr><td>存在多个学习计划</td><td>展示最近选中的计划，支持切换计划</td></tr>
+<tr><td>有计划，且用户需要新增计划</td><td>新增学习计划</td></tr>
+<tr><td>有计划，无任何学习记录</td><td>学习新单词</td></tr>
+<tr><td>刚完成一轮新词学习，存在待复习任务</td><td>复习</td></tr>
+<tr><td>今日复习完成，仍有未学习新词</td><td>再次复习、学习新单词</td></tr>
+<tr><td>所有新词已加入学习，仍有待复习词</td><td>复习</td></tr>
+<tr><td>所有新词已学习且所有复习完成</td><td>完成统计</td></tr>
+</tbody>
+</table></div>
+<h2>7. 首页入口映射</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>首页入口</th><th>目标页面/流程</th><th>入口类型</th></tr></thead>
+<tbody>
+<tr><td>创建/新增学习计划</td><td>学习计划来源选择 → 学习计划配置</td><td>直接入口，后续间接进入配置流程</td></tr>
+<tr><td>选择其它计划</td><td>计划选择列表 → 首页刷新为选中计划状态</td><td>直接入口，切换后记录最近选中的计划</td></tr>
+<tr><td>学习新单词</td><td>新词批次选择 → 新词学习卡片 → 记忆卡片会话</td><td>直接入口，后续间接进入学习与记忆流程</td></tr>
+<tr><td>复习</td><td>复习单词会话 → 记忆卡片会话</td><td>直接入口，复用记忆卡片完成复习</td></tr>
+<tr><td>再次复习</td><td>记忆卡片会话</td><td>直接入口，默认不改变学习序号</td></tr>
+<tr><td>完成统计</td><td>学习计划完成状态/统计占位</td><td>直接入口</td></tr>
+</tbody>
+</table></div>
+<h2>8. 业务规则</h2>
+<ul>
+<li>在学习新单词之前必须先完成复习。</li>
+<li>V1 允许同时存在多个学习计划；首页只展示最近选中的计划。</li>
+<li>用户在首页切换计划后，该计划成为最近选中的计划，首页所有状态和入口都基于该计划计算。</li>
+<li>新增计划创建完成后，默认将新计划设为最近选中的计划并返回首页。</li>
+<li>首页入口由计划进度、学习序号、复习任务和新词剩余量共同决定。</li>
+<li>“再次复习”不改变计划学习序号。</li>
+<li>计划完成后不再展示学习和复习入口，改为展示完成状态/统计占位。</li>
+</ul>
+<h2>9. 状态与异常</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>状态</th><th>页面处理</th></tr></thead>
+<tbody>
+<tr><td>计划数据加载中</td><td>展示加载状态。</td></tr>
+<tr><td>计划数据加载失败</td><td>展示重试入口。</td></tr>
+<tr><td>通知权限未开启</td><td>可在计划卡片展示提醒授权提示。</td></tr>
+<tr><td>多端数据冲突</td><td>以服务端最新计划状态为准，并刷新入口。</td></tr>
+</tbody>
+</table></div>
+<h2>10. 数据需求</h2>
+<ul>
+<li>计划 ID、计划名称、来源信息。</li>
+<li>计划列表、最近选中计划 ID。</li>
+<li>总待学词数、已加入学习词数、已掌握词数。</li>
+<li>当前学习序号。</li>
+<li>今日/当前轮复习任务状态。</li>
+<li>是否存在未学习新词。</li>
+<li>是否所有复习均已完成。</li>
+</ul>
+<h2>11. 埋点</h2>
+<ul>
+<li><code>home_page_view</code></li>
+<li><code>home_create_plan_click</code></li>
+<li><code>home_plan_switch_click</code></li>
+<li><code>home_plan_switch_success</code></li>
+<li><code>home_start_new_words_click</code></li>
+<li><code>home_start_review_click</code></li>
+<li><code>home_restart_review_click</code></li>
+<li><code>home_completion_stats_view</code></li>
+</ul>
+<h2>12. 验收标准</h2>
+<ul>
+<li>首页能根据不同计划状态展示正确入口。</li>
+<li>存在多个学习计划时，首页只展示最近选中的计划。</li>
+<li>用户可以在首页切换计划，切换后计划状态和操作入口同步刷新。</li>
+<li>存在待复习任务时，用户无法绕过复习直接学习新词。</li>
+<li>所有新词已学习后，不再展示新词学习入口。</li>
+<li>计划完成后展示完成状态；统计页面和内容待定时展示占位视图。</li>
+</ul>
+      <nav class="doc-footer" aria-label="上下篇导航">
+        <a href="../index.html">上一页</a><a href="../02_plan_source_selection/index.html">下一页</a>
+      </nav>
+    </article>
+  </main>
+</body>
+</html>

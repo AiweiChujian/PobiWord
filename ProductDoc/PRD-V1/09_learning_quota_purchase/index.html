@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PRD 09：学习额度与购买提醒</title>
+  <link rel="stylesheet" href="../assets/prd.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html">Pobi PRD</a>
+      <nav class="doc-nav" aria-label="PRD 文档导航">
+        <a href="../index.html">总览</a><a href="../01_home_plan_dashboard/index.html">01</a><a href="../02_plan_source_selection/index.html">02</a><a href="../03_plan_configuration/index.html">03</a><a href="../04_new_word_batch_selection/index.html">04</a><a href="../05_new_word_learning_card/index.html">05</a><a href="../06_memory_card_session/index.html">06</a><a href="../07_review_session/index.html">07</a><a href="../08_plan_completion_stats/index.html">08</a><a class="active" href="../09_learning_quota_purchase/index.html">09</a><a href="../10_profile/index.html">10</a>
+      </nav>
+    </div>
+  </header>
+  <main class="page">
+    <article class="doc-card">
+      <div class="doc-meta">Pobi APP 产品需求文档</div>
+      <h1>PRD 09：学习额度与购买提醒</h1>
+<h2>1. 场景定位</h2>
+<p>用户选择新词准备开始学习时，系统需要按本轮选中单词数检查用户是否还有足够学习额度。额度不足时，需明确提醒用户购买，避免进入无法完成的学习流程。</p>
+<h2>2. 用户目标</h2>
+<ul>
+<li>知道当前学习额度是否足够，以及本轮会消耗多少单词额度。</li>
+<li>在额度不足时理解原因。</li>
+<li>可以购买额度后继续当前学习流程。</li>
+</ul>
+<h2>3. 入口</h2>
+<ul>
+<li>新词批次选择页点击“开始学习”时触发。</li>
+<li>额度不足弹窗或购买页。</li>
+<li>Profile 页面的购买或补充额度入口。</li>
+</ul>
+<h2>4. 页面范围</h2>
+<ul>
+<li>额度校验。</li>
+<li>额度不足提醒。</li>
+<li>购买入口。</li>
+<li>购买结果回流。</li>
+</ul>
+<h2>5. 功能需求</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>编号</th><th>功能</th><th>说明</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>F01</td><td>额度查询</td><td>获取用户剩余学习额度。</td><td>P0</td></tr>
+<tr><td>F02</td><td>额度消耗预估</td><td>V1 按单词数计费，本轮预计消耗额度等于本轮选中单词数。</td><td>P0</td></tr>
+<tr><td>F03</td><td>开始前校验</td><td>点击开始学习时校验额度是否足够。</td><td>P0</td></tr>
+<tr><td>F04</td><td>额度不足提醒</td><td>展示剩余额度、所需额度和购买入口。</td><td>P0</td></tr>
+<tr><td>F05</td><td>购买额度</td><td>用户完成购买后刷新额度。</td><td>P0</td></tr>
+<tr><td>F06</td><td>继续学习</td><td>购买成功后回到原学习批次并继续开始学习。</td><td>P0</td></tr>
+<tr><td>F07</td><td>调整批次数量</td><td>用户可返回选词页减少本轮单词数。</td><td>P1</td></tr>
+</tbody>
+</table></div>
+<h2>6. 业务规则</h2>
+<ul>
+<li>只有在学习额度足够时，才允许创建新词学习批次。</li>
+<li>V1 学习额度计费单位为单词数。</li>
+<li>本轮预计消耗额度 = 本轮选中单词数。</li>
+<li>学习额度不足时，不应扣减任何额度。</li>
+<li>购买成功后必须重新查询额度。</li>
+<li>手选模式下，额度按实际选择单词数校验。</li>
+</ul>
+<h2>7. 状态与异常</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>状态</th><th>页面处理</th></tr></thead>
+<tbody>
+<tr><td>额度查询失败</td><td>展示查询失败，支持重试，不允许绕过。</td></tr>
+<tr><td>额度不足</td><td>展示购买提醒与返回调整入口。</td></tr>
+<tr><td>支付取消</td><td>返回额度不足状态，不创建学习批次。</td></tr>
+<tr><td>支付失败</td><td>展示失败原因和重试入口。</td></tr>
+<tr><td>支付成功但额度未刷新</td><td>重新查询，仍失败则提示稍后查看。</td></tr>
+</tbody>
+</table></div>
+<h2>8. 数据需求</h2>
+<ul>
+<li>用户 ID。</li>
+<li>剩余学习额度。</li>
+<li>本轮选中单词数。</li>
+<li>本轮预计消耗额度，等于本轮选中单词数。</li>
+<li>商品 ID、价格、购买记录。</li>
+<li>支付状态。</li>
+</ul>
+<h2>9. 埋点</h2>
+<ul>
+<li><code>learning_quota_query</code></li>
+<li><code>learning_quota_check_pass</code></li>
+<li><code>learning_quota_check_fail</code></li>
+<li><code>quota_purchase_modal_view</code></li>
+<li><code>quota_purchase_click</code></li>
+<li><code>quota_purchase_success</code></li>
+<li><code>quota_purchase_fail</code></li>
+<li><code>quota_purchase_cancel</code></li>
+</ul>
+<h2>10. 验收标准</h2>
+<ul>
+<li>额度充足时，用户可正常进入新词学习卡片。</li>
+<li>系统按本轮选中单词数完成额度预估和校验。</li>
+<li>额度不足时，用户无法开始学习，并能看到明确原因。</li>
+<li>购买成功后可回到原批次继续学习。</li>
+<li>购买失败或取消不会创建学习批次，也不会扣减额度。</li>
+</ul>
+      <nav class="doc-footer" aria-label="上下篇导航">
+        <a href="../08_plan_completion_stats/index.html">上一页</a><a href="../10_profile/index.html">下一页</a>
+      </nav>
+    </article>
+  </main>
+</body>
+</html>

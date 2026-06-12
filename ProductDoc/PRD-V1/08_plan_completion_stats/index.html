@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PRD 08：学习计划完成统计</title>
+  <link rel="stylesheet" href="../assets/prd.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html">Pobi PRD</a>
+      <nav class="doc-nav" aria-label="PRD 文档导航">
+        <a href="../index.html">总览</a><a href="../01_home_plan_dashboard/index.html">01</a><a href="../02_plan_source_selection/index.html">02</a><a href="../03_plan_configuration/index.html">03</a><a href="../04_new_word_batch_selection/index.html">04</a><a href="../05_new_word_learning_card/index.html">05</a><a href="../06_memory_card_session/index.html">06</a><a href="../07_review_session/index.html">07</a><a class="active" href="../08_plan_completion_stats/index.html">08</a><a href="../09_learning_quota_purchase/index.html">09</a><a href="../10_profile/index.html">10</a>
+      </nav>
+    </div>
+  </header>
+  <main class="page">
+    <article class="doc-card">
+      <div class="doc-meta">Pobi APP 产品需求文档</div>
+      <h1>PRD 08：学习计划完成统计</h1>
+<h2>1. 场景定位</h2>
+<p>当计划内所有单词都完成学习并完成全部复习后，首页不再展示学习入口，而是进入计划完成状态。V1 中完成统计页面和具体统计内容待定，本 PRD 仅定义完成状态入口、占位展示和后续创建新计划入口。</p>
+<h2>2. 用户目标</h2>
+<ul>
+<li>确认学习计划已完成。</li>
+<li>看到完成状态占位信息。</li>
+<li>决定是否开启新的学习计划。</li>
+</ul>
+<h2>3. 入口</h2>
+<ul>
+<li>首页计划完成状态。</li>
+<li>完成最后一轮复习后的结果页。</li>
+</ul>
+<h2>4. 页面范围</h2>
+<ul>
+<li>完成状态提示。</li>
+<li>统计内容待定占位。</li>
+<li>创建新学习计划入口。</li>
+</ul>
+<h2>5. 功能需求</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>编号</th><th>功能</th><th>说明</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>F01</td><td>完成状态展示</td><td>明确告知用户该计划已完成。</td><td>P0</td></tr>
+<tr><td>F02</td><td>统计占位</td><td>完成统计页面和具体统计内容待定，V1 可展示占位说明。</td><td>P0</td></tr>
+<tr><td>F03</td><td>创建新计划</td><td>提供继续创建学习计划入口。</td><td>P0</td></tr>
+</tbody>
+</table></div>
+<h2>6. 业务规则</h2>
+<ul>
+<li>完成条件：所有单词已加入学习，且所有单词完成最后一轮复习。</li>
+<li>完成状态视图应替代学习/复习操作入口。</li>
+<li>完成统计页面和具体统计内容待定，在后续版本或后续 PRD 中补充。</li>
+</ul>
+<h2>7. 状态与异常</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>状态</th><th>页面处理</th></tr></thead>
+<tbody>
+<tr><td>统计内容未配置</td><td>展示完成状态和统计待定占位。</td></tr>
+<tr><td>数据不一致</td><td>重新拉取计划进度并校验完成条件。</td></tr>
+</tbody>
+</table></div>
+<h2>8. 数据需求</h2>
+<ul>
+<li>计划 ID、计划名称、来源名称。</li>
+<li>计划完成状态。</li>
+<li>统计内容配置状态。</li>
+</ul>
+<h2>9. 埋点</h2>
+<ul>
+<li><code>plan_completion_page_view</code></li>
+<li><code>plan_completion_create_new_click</code></li>
+</ul>
+<h2>10. 验收标准</h2>
+<ul>
+<li>计划完成后首页展示完成统计，不再展示学习/复习入口。</li>
+<li>统计内容待定时，页面展示完成状态和占位说明。</li>
+<li>用户可以从完成统计页创建新的学习计划。</li>
+</ul>
+      <nav class="doc-footer" aria-label="上下篇导航">
+        <a href="../07_review_session/index.html">上一页</a><a href="../09_learning_quota_purchase/index.html">下一页</a>
+      </nav>
+    </article>
+  </main>
+</body>
+</html>

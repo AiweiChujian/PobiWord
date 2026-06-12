@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PRD 07：复习单词会话</title>
+  <link rel="stylesheet" href="../assets/prd.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html">Pobi PRD</a>
+      <nav class="doc-nav" aria-label="PRD 文档导航">
+        <a href="../index.html">总览</a><a href="../01_home_plan_dashboard/index.html">01</a><a href="../02_plan_source_selection/index.html">02</a><a href="../03_plan_configuration/index.html">03</a><a href="../04_new_word_batch_selection/index.html">04</a><a href="../05_new_word_learning_card/index.html">05</a><a href="../06_memory_card_session/index.html">06</a><a class="active" href="../07_review_session/index.html">07</a><a href="../08_plan_completion_stats/index.html">08</a><a href="../09_learning_quota_purchase/index.html">09</a><a href="../10_profile/index.html">10</a>
+      </nav>
+    </div>
+  </header>
+  <main class="page">
+    <article class="doc-card">
+      <div class="doc-meta">Pobi APP 产品需求文档</div>
+      <h1>PRD 07：复习单词会话</h1>
+<h2>1. 场景定位</h2>
+<p>复习会话基于简化版艾宾浩斯周期自动生成。Pobi 假定用户一天学习一个新词列表，在学习新词前必须先完成复习，因此复习是首页优先级最高的日常任务。</p>
+<h2>2. 用户目标</h2>
+<ul>
+<li>按系统安排完成该轮应复习单词。</li>
+<li>使用与新词记忆一致的卡片交互，减少学习成本。</li>
+<li>完成最后一轮复习后，将单词标记为已掌握。</li>
+</ul>
+<h2>3. 入口</h2>
+<ul>
+<li>首页“复习”入口。</li>
+<li>首页“再次复习”入口。</li>
+<li>所有新词学完后首页保留的“复习”入口。</li>
+</ul>
+<h2>4. 页面范围</h2>
+<ul>
+<li>复习任务概览。</li>
+<li>本轮复习单词列表生成。</li>
+<li>记忆卡片复用。</li>
+<li>复习完成状态。</li>
+<li>学习序号更新。</li>
+</ul>
+<h2>5. 功能需求</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>编号</th><th>功能</th><th>说明</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>F01</td><td>复习任务计算</td><td>按学习序号和周期生成本轮复习词表。</td><td>P0</td></tr>
+<tr><td>F02</td><td>复习词表合并</td><td>同一轮中可能存在多个历史批次，需合并为本轮复习列表。</td><td>P0</td></tr>
+<tr><td>F03</td><td>记忆卡片复用</td><td>本轮所有复习单词复用记忆卡片完成记忆。</td><td>P0</td></tr>
+<tr><td>F04</td><td>学习序号更新</td><td>有新词时，完成新词学习后学习序号 +1；无新词时，完成复习后学习序号 +1。</td><td>P0</td></tr>
+<tr><td>F05</td><td>最后一轮掌握</td><td>单词完成最后一轮复习后，标记为已掌握。</td><td>P0</td></tr>
+<tr><td>F06</td><td>无复习任务处理</td><td>无需复习时返回首页并更新可用入口。</td><td>P0</td></tr>
+<tr><td>F07</td><td>再次复习</td><td>用户可对已完成的本轮内容再次复习。</td><td>P1</td></tr>
+</tbody>
+</table></div>
+<h2>6. 复习周期规则</h2>
+<ul>
+<li>原始艾宾浩斯周期为：1、2、4、7、15。</li>
+<li>Pobi 简化为：1、3、6、13。</li>
+<li>学习计划有一个从 1 开始的学习序号。</li>
+<li>用当前学习序号分别减去 1、3、6、13，得到需要复习的历史学习列表序号。</li>
+<li>这些历史学习列表中的单词组成本轮复习列表。</li>
+</ul>
+<h2>7. 学习序号规则</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>条件</th><th>学习序号更新</th></tr></thead>
+<tbody>
+<tr><td>有需要学习的新单词</td><td>完成新单词学习后，学习序号 +1。</td></tr>
+<tr><td>没有需要学习的新单词</td><td>完成单词复习后，学习序号 +1。</td></tr>
+<tr><td>再次复习</td><td>不更新学习序号。</td></tr>
+</tbody>
+</table></div>
+<h2>8. 业务规则</h2>
+<ul>
+<li>学习新单词之前必须先完成复习。</li>
+<li>本轮复习单词使用记忆卡片会话完成，不额外设计新的记忆逻辑。</li>
+<li>单词完成第 13 间隔对应的最后一轮复习后，即可标记为已掌握。</li>
+<li>已掌握单词不再进入新计划候选词和后续普通复习。</li>
+<li>用户移除某个单词的已掌握标记后，该单词恢复为未掌握状态，可重新参与后续筛选。</li>
+</ul>
+<h2>9. 状态与异常</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>状态</th><th>页面处理</th></tr></thead>
+<tbody>
+<tr><td>本轮无复习词</td><td>展示无复习任务，返回首页展示新词入口。</td></tr>
+<tr><td>复习列表生成失败</td><td>展示失败提示并支持重试。</td></tr>
+<tr><td>记忆会话中断</td><td>保存进度，返回后继续。</td></tr>
+<tr><td>单词已被用户标记掌握</td><td>从本轮复习列表移除。</td></tr>
+</tbody>
+</table></div>
+<h2>10. 数据需求</h2>
+<ul>
+<li>计划 ID。</li>
+<li>当前学习序号。</li>
+<li>历史学习批次及其学习序号。</li>
+<li>复习周期：1、3、6、13。</li>
+<li>本轮复习词表。</li>
+<li>每个单词已完成的复习轮次。</li>
+<li>单词是否已掌握。</li>
+</ul>
+<h2>11. 埋点</h2>
+<ul>
+<li><code>review_session_start</code></li>
+<li><code>review_word_list_generated</code></li>
+<li><code>review_word_list_empty</code></li>
+<li><code>review_memory_session_complete</code></li>
+<li><code>review_sequence_increment</code></li>
+<li><code>review_word_mastered</code></li>
+<li><code>review_session_complete</code></li>
+</ul>
+<h2>12. 验收标准</h2>
+<ul>
+<li>系统能按学习序号正确计算本轮复习词表。</li>
+<li>复习会话复用记忆卡片，并按记忆卡片规则完成。</li>
+<li>最后一轮复习完成后，单词自动标记为已掌握。</li>
+<li>存在复习任务时，首页不允许用户先学习新词。</li>
+</ul>
+      <nav class="doc-footer" aria-label="上下篇导航">
+        <a href="../06_memory_card_session/index.html">上一页</a><a href="../08_plan_completion_stats/index.html">下一页</a>
+      </nav>
+    </article>
+  </main>
+</body>
+</html>

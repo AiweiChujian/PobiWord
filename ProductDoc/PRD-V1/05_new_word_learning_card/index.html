@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PRD 05：新词学习卡片</title>
+  <link rel="stylesheet" href="../assets/prd.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html">Pobi PRD</a>
+      <nav class="doc-nav" aria-label="PRD 文档导航">
+        <a href="../index.html">总览</a><a href="../01_home_plan_dashboard/index.html">01</a><a href="../02_plan_source_selection/index.html">02</a><a href="../03_plan_configuration/index.html">03</a><a href="../04_new_word_batch_selection/index.html">04</a><a class="active" href="../05_new_word_learning_card/index.html">05</a><a href="../06_memory_card_session/index.html">06</a><a href="../07_review_session/index.html">07</a><a href="../08_plan_completion_stats/index.html">08</a><a href="../09_learning_quota_purchase/index.html">09</a><a href="../10_profile/index.html">10</a>
+      </nav>
+    </div>
+  </header>
+  <main class="page">
+    <article class="doc-card">
+      <div class="doc-meta">Pobi APP 产品需求文档</div>
+      <h1>PRD 05：新词学习卡片</h1>
+<h2>1. 场景定位</h2>
+<p>用户选定新词批次后，通过学习卡片逐个理解单词。学习卡片负责呈现单词、发音、AI 解读、释义和例句，并在所有单词呈现完成后进入记忆卡片会话。</p>
+<h2>2. 用户目标</h2>
+<ul>
+<li>逐步理解一个新单词的读音、释义和例句。</li>
+<li>控制学习节奏，确认后切换到下一个单词。</li>
+<li>在 AI 内容生成失败时可重新生成。</li>
+</ul>
+<h2>3. 入口</h2>
+<ul>
+<li>新词批次选择页点击“开始学习”后进入。</li>
+</ul>
+<h2>4. 页面范围</h2>
+<ul>
+<li>学习进度。</li>
+<li>单词本身。</li>
+<li>单词播音。</li>
+<li>AI 解读。</li>
+<li>音标、词性释义、例句。</li>
+<li>例句播音。</li>
+<li>重新生成失败内容。</li>
+<li>下一个单词/进入记忆按钮。</li>
+</ul>
+<h2>5. 功能需求</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>编号</th><th>功能</th><th>说明</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>F01</td><td>单词展示</td><td>展示当前单词文本。</td><td>P0</td></tr>
+<tr><td>F02</td><td>单词发音</td><td>支持播放单词读音。</td><td>P0</td></tr>
+<tr><td>F03</td><td>AI 解读</td><td>展示音标、词性、释义、例句等内容。</td><td>P0</td></tr>
+<tr><td>F04</td><td>英美音标区分</td><td>音标区分英式、美式；不同词性读音不同也需注明。</td><td>P0</td></tr>
+<tr><td>F05</td><td>多词性释义</td><td>按词性组织释义和例句。</td><td>P0</td></tr>
+<tr><td>F06</td><td>例句生成</td><td>例句尽量使用用户已掌握单词创建。</td><td>P0</td></tr>
+<tr><td>F07</td><td>例句播放</td><td>例句可点击播放。</td><td>P1</td></tr>
+<tr><td>F08</td><td>逐步呈现</td><td>单词信息按步骤呈现，而不是一次性全部展开。</td><td>P0</td></tr>
+<tr><td>F09</td><td>重新生成</td><td>AI 内容生成失败时支持重新生成对应内容。</td><td>P0</td></tr>
+<tr><td>F10</td><td>切换下一个单词</td><td>用户完成当前卡片后切换到下一个单词。</td><td>P0</td></tr>
+<tr><td>F11</td><td>进入记忆会话</td><td>批次内所有单词呈现一遍后，进入记忆卡片。</td><td>P0</td></tr>
+</tbody>
+</table></div>
+<h2>6. 业务规则</h2>
+<ul>
+<li>学习卡片必须先完成本轮所有新词的首次呈现，才能进入记忆卡片会话。</li>
+<li>AI 例句生成应优先使用用户已掌握词，降低理解成本。</li>
+<li>单词、发音、释义、例句是学习卡片的核心内容，不应缺失；若生成失败，展示可重试状态。</li>
+<li>不同词性下存在不同读音时，需明确标注。</li>
+</ul>
+<h2>7. 状态与异常</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>状态</th><th>页面处理</th></tr></thead>
+<tbody>
+<tr><td>AI 内容生成中</td><td>展示生成中状态，不阻断已生成内容浏览。</td></tr>
+<tr><td>单词发音失败</td><td>展示失败提示，支持重试播放。</td></tr>
+<tr><td>例句生成失败</td><td>展示失败状态，支持重新生成。</td></tr>
+<tr><td>当前单词内容不完整</td><td>允许重试生成缺失内容。</td></tr>
+<tr><td>用户中途退出</td><td>保存当前学习进度，返回后可继续。</td></tr>
+</tbody>
+</table></div>
+<h2>8. 数据需求</h2>
+<ul>
+<li>批次 ID、计划 ID。</li>
+<li>当前单词 ID、拼写。</li>
+<li>英式/美式音标与音频。</li>
+<li>词性、释义、例句、例句音频。</li>
+<li>AI 生成状态与失败原因。</li>
+<li>用户已掌握单词集合。</li>
+<li>当前批次学习进度。</li>
+</ul>
+<h2>9. 埋点</h2>
+<ul>
+<li><code>learning_card_page_view</code></li>
+<li><code>word_audio_play</code></li>
+<li><code>example_audio_play</code></li>
+<li><code>ai_explanation_generate_start</code></li>
+<li><code>ai_explanation_generate_success</code></li>
+<li><code>ai_explanation_generate_fail</code></li>
+<li><code>ai_explanation_regenerate_click</code></li>
+<li><code>learning_card_next_click</code></li>
+<li><code>learning_cards_complete</code></li>
+</ul>
+<h2>10. 验收标准</h2>
+<ul>
+<li>批次内每个单词都能按学习卡片完成一次呈现。</li>
+<li>音标、词性释义和例句结构清晰。</li>
+<li>AI 生成失败时，用户可以重新生成失败内容。</li>
+<li>全部单词学习卡片完成后自动进入记忆卡片会话。</li>
+</ul>
+      <nav class="doc-footer" aria-label="上下篇导航">
+        <a href="../04_new_word_batch_selection/index.html">上一页</a><a href="../06_memory_card_session/index.html">下一页</a>
+      </nav>
+    </article>
+  </main>
+</body>
+</html>
