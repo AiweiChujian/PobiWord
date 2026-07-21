@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pobi Wireframe QA Comparison</title>
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-width: 820px;
+        background: #e9ebef;
+        color: #202126;
+        font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+      }
+      main {
+        min-height: 100vh;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 24px;
+        padding: 18px;
+      }
+      figure {
+        width: 390px;
+        margin: 0;
+      }
+      figcaption {
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px 10px 0 0;
+        background: #202126;
+        color: white;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      img {
+        width: 390px;
+        height: 844px;
+        display: block;
+        object-fit: fill;
+        background: white;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <figure>
+        <figcaption>锁定 H-03A 视觉方向</figcaption>
+        <img src="/qa-artifacts/h-03a-visual-direction-final.png" alt="锁定的 H-03A 视觉方向" />
+      </figure>
+      <figure>
+        <figcaption>反向更新后的原型 H-03A</figcaption>
+        <img src="/qa-artifacts/h-03a-review.png" alt="实现后的 H-03A 首页" />
+      </figure>
+    </main>
+  </body>
+</html>
