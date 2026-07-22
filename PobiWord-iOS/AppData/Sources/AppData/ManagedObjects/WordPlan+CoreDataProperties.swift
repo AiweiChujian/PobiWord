@@ -1,5 +1,5 @@
 //
-//  WordLearnPlanMO+CoreDataProperties.swift
+//  WordPlanMO+CoreDataProperties.swift
 //  
 //
 //  Created by Avery on 2025/10/30.
@@ -10,12 +10,12 @@ import Foundation
 import CoreData
 
 
-public typealias WordLearnPlanMOCoreDataPropertiesSet = NSSet
+public typealias WordPlanMOCoreDataPropertiesSet = NSSet
 
-extension WordLearnPlanMO {
+extension WordPlanMO {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<WordLearnPlanMO> {
-        return NSFetchRequest<WordLearnPlanMO>(entityName: "WordLearnPlanMO")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<WordPlanMO> {
+        return NSFetchRequest<WordPlanMO>(entityName: "WordPlanMO")
     }
 
     @NSManaged public var title: String
@@ -24,12 +24,12 @@ extension WordLearnPlanMO {
     @NSManaged public var nextTurnIndex: Int64
     @NSManaged public var lastFinishTurnRaw: Int16
     @NSManaged public var words: [LearningWordMO]
-    @NSManaged public var learningGroup: LearningWrodGroupMO?
+    @NSManaged public var learningGroup: WordLearningGroupMO?
 
 }
 
 // MARK: Generated accessors for words
-extension WordLearnPlanMO {
+extension WordPlanMO {
 
     @objc(insertObject:inWordsAtIndex:)
     @NSManaged public func insertIntoWords(_ value: LearningWordMO, at idx: Int)

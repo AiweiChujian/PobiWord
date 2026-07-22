@@ -22,6 +22,6 @@ extension LearningWordMO {
     @NSManaged public var learningScore: Int64
     @NSManaged public var trunIndex: Int64
     @NSManaged public var word: WordMO
-    @NSManaged public var learnPlan: WordLearnPlanMO
+    @NSManaged public var learnPlan: WordPlanMO
 
 }
