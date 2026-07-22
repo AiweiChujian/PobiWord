@@ -942,8 +942,9 @@ button.setting-row {
   border-radius: 50%;
   background: conic-gradient(
     from -90deg,
-    #50ed36 0deg,
-    #b7f339 calc(var(--progress-angle) * 0.62),
+    #30d158 0deg,
+    #30d158 calc(var(--progress-angle) * 0.12),
+    #b7e83b calc(var(--progress-angle) * 0.68),
     #ffe33b var(--progress-angle),
     #34363b var(--progress-angle),
     #34363b 360deg
@@ -1022,9 +1023,9 @@ button.setting-row {
 }
 
 .metric-title svg {
-  width: 13px;
-  height: 13px;
-  flex: 0 0 13px;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
 }
 
 .metric-card strong {

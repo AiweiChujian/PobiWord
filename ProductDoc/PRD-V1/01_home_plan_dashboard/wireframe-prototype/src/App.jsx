@@ -19,6 +19,7 @@ import {
   Sparkle,
   SpeakerHigh,
   UserCircle,
+  Warning,
   WifiHigh,
   BatteryFull,
   CellSignalFull,
@@ -133,15 +134,15 @@ function PlanDashboard({ plan }) {
 
       <div className="dashboard-metrics">
         <div className="metric-card metric-remaining">
-          <span className="metric-title"><BookOpenText size={13} weight="bold" />待学习</span>
+          <span className="metric-title"><Warning size={14} weight="bold" />易错词</span>
           <strong>{formatNumber(plan.remaining)}</strong>
         </div>
         <div className="metric-card metric-mastered">
-          <span className="metric-title"><Check size={13} weight="bold" />已掌握</span>
+          <span className="metric-title"><Check size={14} weight="bold" />已掌握</span>
           <strong>{formatNumber(plan.mastered)}</strong>
         </div>
         <div className="metric-card metric-date">
-          <span className="metric-title"><CalendarBlank size={13} weight="bold" />预计完成日期</span>
+          <span className="metric-title"><CalendarBlank size={14} weight="bold" />预计完成日期</span>
           <strong>{plan.date}</strong>
         </div>
       </div>
