@@ -4,4 +4,4 @@
 @_exported import AppData
 @_exported import Logging
 
-let logger = Logger(label: "AppFoundation")
+nonisolated let logger = Logger(label: "AppFoundation")

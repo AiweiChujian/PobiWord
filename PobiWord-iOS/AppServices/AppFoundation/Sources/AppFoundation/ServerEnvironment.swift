@@ -8,7 +8,7 @@
 import Foundation
 
 /// API环境枚举
-public enum ServerEnvironment {
+nonisolated public enum ServerEnvironment: Sendable {
     /// 开发环境
     case development
     /// 生产环境
@@ -18,22 +18,22 @@ public enum ServerEnvironment {
 // MARK: - 环境判断
 public extension ServerEnvironment {
     /// 获取当前环境
-    static let current: Self = {
+    nonisolated static let current: Self = {
 #if !DEBUG && !targetEnvironment(simulator)
-        guard AppContext.isSandbox() else { return .production } // 兜底配置, Release
+        guard AppContext.isSandbox else { return .production } // 兜底配置, Release
 #endif
         return (AppContext.buildVersion % 2 == 0) ? .production : .development
     }()
     
     /// 判断是否链接的测试环境
-    static var isDevelopment: Bool {
+    nonisolated static var isDevelopment: Bool {
         current == .development
     }
 }
 
-public enum ServerHost {
+nonisolated public enum ServerHost {
     /// 静态访问当前环境的基础URL
-    static var baseURL: URL {
+    nonisolated static var baseURL: URL {
         assertionFailure("设置 base URL")
         switch ServerEnvironment.current {
         case .development:

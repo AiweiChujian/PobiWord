@@ -10,7 +10,7 @@ import Logging
 import SwiftyBeaver
 
 extension String {
-    func appendingPathComponent(_ pathComponent: String) -> String {
+    nonisolated func appendingPathComponent(_ pathComponent: String) -> String {
         let path: String
         if self.hasSuffix("/") {
             if pathComponent.hasPrefix("/") {
@@ -35,7 +35,6 @@ extension String {
 }
 
 extension Logger {
-    @MainActor
     public static func setup(isDevelopment: Bool, logDirectory: String? = nil) {
         // SwiftyBeaver FileDestination
         if let logDirectory {
@@ -43,12 +42,10 @@ extension Logger {
             makeBeaverFileDestination(logDirectory)
         }
 
-        LoggingSystem.bootstrap { label in
-            logHandler(for: label)
-        }
+        LoggingSystem.bootstrap(logHandler(for:))
     }
     
-    private static func logHandler(for label: String) -> any LogHandler {
+    nonisolated private static func logHandler(for label: String) -> any LogHandler {
         let beaverHandler = BeaverLogHandler(label: label)
         let isSimulator: Bool
 #if targetEnvironment(simulator)

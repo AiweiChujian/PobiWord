@@ -9,6 +9,7 @@ import UIKit
 import AppUI
 import AppHome
 import AppProfile
+import WordPlan
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -58,4 +59,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 }
-

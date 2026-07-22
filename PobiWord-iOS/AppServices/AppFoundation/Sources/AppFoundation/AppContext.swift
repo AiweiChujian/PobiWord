@@ -1,5 +1,4 @@
 //
-//  File.swift
 //  AppFoundation
 //
 //  Created by Avery on 2026/4/9.
@@ -10,16 +9,16 @@ import Foundation
 import UIKit
 #endif
 
-public enum AppContext {}
+nonisolated public enum AppContext {}
 
 public extension AppContext {
-    static let version: String = {
+    nonisolated static let version: String = {
         guard let infoDictionary = Bundle.main.infoDictionary else { return "1.0.0" }
         let majorVersion = infoDictionary["CFBundleShortVersionString"] as? String
         return majorVersion ?? "1.0.0"
     }()
     
-    static let buildVersion: Int = {
+    nonisolated static let buildVersion: Int = {
         // Bundle.main 代表当前应用的 Bund
         guard let value = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String else {
             return 0
@@ -27,13 +26,13 @@ public extension AppContext {
         return Int(value) ?? 0
     }()
     
-    static let appName: String = {
+    nonisolated static let appName: String = {
         assertionFailure("设置 App Name")
         return "AppDemo"
     }()
     
     
-    static var isSandbox: Bool {
+    nonisolated static var isSandbox: Bool {
         guard let path = Bundle.main.appStoreReceiptURL?.path() else {
             return false
         }

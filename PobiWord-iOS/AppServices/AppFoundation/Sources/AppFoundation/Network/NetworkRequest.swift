@@ -1,5 +1,4 @@
 //
-//  File.swift
 //  AppNetwork
 //
 //  Created by Avery on 2025/7/29.
@@ -8,14 +7,14 @@
 import Foundation
 import Alamofire
 
-public protocol NetworkParameters: Encodable {}
+nonisolated public protocol NetworkParameters: Encodable, Sendable {}
 
 
-public struct NetworkEmptyParams: NetworkParameters {}
+nonisolated public struct NetworkEmptyParams: NetworkParameters {}
 
 /// 网络请求协议
 public protocol NetworkRequest {
-    associatedtype Params: Encodable
+    associatedtype Params: Encodable & Sendable
     
     typealias EmptyParams = NetworkEmptyParams
     /// 参数
@@ -53,7 +52,7 @@ public protocol NetworkRequest {
 }
 
 public extension NetworkRequest where Params == EmptyParams {
-    var params: Params? { nil }
+    nonisolated var params: Params? { nil }
 }
 
 public extension NetworkRequest {

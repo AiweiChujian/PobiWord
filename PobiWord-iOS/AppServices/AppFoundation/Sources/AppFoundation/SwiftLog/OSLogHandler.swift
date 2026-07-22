@@ -8,9 +8,9 @@
 import Foundation
 import Logging
 import OSLog
-import Combine
+@preconcurrency import Combine
 
-struct OSLogHandler: LogHandler {
+nonisolated struct OSLogHandler: LogHandler {
     typealias Logger = Logging.Logger
     
     static let errorLogSubject = PassthroughSubject<String, Never>()

@@ -8,6 +8,9 @@
       location = "group:AppFeatures"
       name = "AppFeatures">
       <FileRef
+         location = "group:WordPlan">
+      </FileRef>
+      <FileRef
          location = "group:AppProfile">
       </FileRef>
       <FileRef
@@ -21,13 +24,10 @@
       location = "group:AppServices"
       name = "AppServices">
       <FileRef
+         location = "group:WordPlanService">
+      </FileRef>
+      <FileRef
          location = "group:AppFoundation">
-      </FileRef>
-      <FileRef
-         location = "group:AppLog">
-      </FileRef>
-      <FileRef
-         location = "group:AppNetwork">
       </FileRef>
    </Group>
    <FileRef

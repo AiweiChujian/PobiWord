@@ -1,5 +1,4 @@
 //
-//  File.swift
 //  AppNetwork
 //
 //  Created by Avery on 2025/7/29.
@@ -10,7 +9,7 @@ import Alamofire
 import Logging
 
 /// 网络错误类型枚举
-public enum NetworkError: Error {
+nonisolated public enum NetworkError: Error {
     /// 服务器返回了非 0 的 Code
     case badResponseCode(_ code: Int, msg: String)
     /// 需要的 Data 为空

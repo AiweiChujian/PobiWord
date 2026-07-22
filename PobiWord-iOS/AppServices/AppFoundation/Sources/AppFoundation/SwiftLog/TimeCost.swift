@@ -10,7 +10,7 @@ import OSLog
 import os.signpost
 import Logging
 
-public struct TimeCost: Sendable {
+nonisolated public struct TimeCost: Sendable {
     public let log: OSLog
     public let signpostID: OSSignpostID
     public let subsystem: String
@@ -18,7 +18,7 @@ public struct TimeCost: Sendable {
     public let time: CFAbsoluteTime
 }
 
-public struct TimeCostTarget {
+nonisolated public struct TimeCostTarget {
     public var subsystem: String
     public var name: StaticString
     

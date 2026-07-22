@@ -1,5 +1,4 @@
 //
-//  File.swift
 //  AppNetwork
 //
 //  Created by Avery on 2025/7/29.
@@ -11,8 +10,7 @@ import Alamofire
 public extension NetworkRequest {
     /// 执行请求并返回响应数据
     /// - Returns: 解码后的响应数据
-    @MainActor
-    func execute<ResponseData: Codable>() async throws(NetworkError) -> ResponseData? {
+    func execute<ResponseData: Codable & Sendable>() async throws(NetworkError) -> ResponseData? {
         do {
             let task: DataTask<NetworkResponse.Base<ResponseData>>?
             if isUploadTask() {
@@ -46,7 +44,7 @@ public extension NetworkRequest {
     }
     
     /// 执行请求不关心响应数据
-    @MainActor @discardableResult
+    @discardableResult
     func executeWithoutData() async throws(NetworkError) -> Bool {
         let result: NetworkResponse.EmptyData? = try await execute()
         return result != nil
