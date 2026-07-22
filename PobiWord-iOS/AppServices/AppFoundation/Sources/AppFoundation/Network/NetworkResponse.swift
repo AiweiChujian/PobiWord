@@ -1,5 +1,4 @@
 //
-//  File.swift
 //  AppNetwork
 //
 //  Created by Avery on 2025/7/29.
@@ -7,9 +6,9 @@
 
 import Foundation
 
-public enum NetworkResponse {
+nonisolated public enum NetworkResponse {
     /// 标准API响应基础结构
-    public struct Base<T: Codable>: Codable {
+    nonisolated public struct Base<T: Codable & Sendable>: Codable, Sendable {
         /// 接口返回状态码，0表示成功
         public let code: Int
         /// 接口返回数据
@@ -41,6 +40,5 @@ public enum NetworkResponse {
 
 public extension NetworkResponse {
     /// 表示空数据响应的结构体
-    struct EmptyData: Codable {}
+    nonisolated struct EmptyData: Codable, Sendable {}
 }
-

@@ -1,5 +1,5 @@
 //
-//  LearningWrodGroupMO+CoreDataProperties.swift
+//  WordLearningGroupMO+CoreDataProperties.swift
 //  
 //
 //  Created by Avery on 2025/10/30.
@@ -10,22 +10,22 @@ import Foundation
 import CoreData
 
 
-public typealias LearningWrodGroupMOCoreDataPropertiesSet = NSSet
+public typealias WordLearningGroupMOCoreDataPropertiesSet = NSSet
 
-extension LearningWrodGroupMO {
+extension WordLearningGroupMO {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<LearningWrodGroupMO> {
-        return NSFetchRequest<LearningWrodGroupMO>(entityName: "LearningWrodGroupMO")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<WordLearningGroupMO> {
+        return NSFetchRequest<WordLearningGroupMO>(entityName: "WordLearningGroupMO")
     }
 
     @NSManaged public var learnWords: [LearningWordMO]
     @NSManaged public var reviewWords: [LearningWordMO]
-    @NSManaged public var learnPlan: WordLearnPlanMO
+    @NSManaged public var learnPlan: WordPlanMO
 
 }
 
 // MARK: Generated accessors for learnWords
-extension LearningWrodGroupMO {
+extension WordLearningGroupMO {
 
     @objc(addLearnWordsObject:)
     @NSManaged public func addToLearnWords(_ value: LearningWordMO)
@@ -42,7 +42,7 @@ extension LearningWrodGroupMO {
 }
 
 // MARK: Generated accessors for reviewWords
-extension LearningWrodGroupMO {
+extension WordLearningGroupMO {
 
     @objc(addReviewWordsObject:)
     @NSManaged public func addToReviewWords(_ value: LearningWordMO)

@@ -6,6 +6,7 @@ import PackageDescription
 enum PackageDependencies: CaseIterable {
     case appHome
     case appProfile
+    case wordPlan
     
     var dependency: PackageDescription.Package.Dependency {
         switch self {
@@ -13,6 +14,8 @@ enum PackageDependencies: CaseIterable {
             return .package(path: "../AppFeatures/AppHome")
         case .appProfile:
             return .package(path: "../AppFeatures/AppProfile")
+        case .wordPlan:
+            return .package(path: "../AppFeatures/WordPlan")
         }
     }
 }
@@ -21,6 +24,7 @@ enum PackageDependencies: CaseIterable {
 enum AppDependence: CaseIterable {
     case appHome
     case appProfile
+    case wordPlan
 
     var dependency: PackageDescription.Target.Dependency {
         switch self {
@@ -28,6 +32,8 @@ enum AppDependence: CaseIterable {
             return .product(name: "AppHome", package: "AppHome")
         case .appProfile:
             return .product(name: "AppProfile", package: "AppProfile")
+        case .wordPlan:
+            return .product(name: "WordPlan", package: "WordPlan")
         }
     }
 }

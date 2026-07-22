@@ -1,5 +1,4 @@
 //
-//  File.swift
 //  STNetwork
 //
 //
@@ -7,7 +6,7 @@
 import Foundation
 import Alamofire
 
-public class NetworkTimeout: RequestAdapter, @unchecked Sendable {
+nonisolated public class NetworkTimeout: RequestAdapter, @unchecked Sendable {
     private let timeoutInterval: TimeInterval
     
     public init(timeoutInterval: TimeInterval) {
@@ -20,4 +19,3 @@ public class NetworkTimeout: RequestAdapter, @unchecked Sendable {
         completion(.success(adaptedRequest))
     }
 }
-

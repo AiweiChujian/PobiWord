@@ -1,4 +1,4 @@
-// swift-tools-version: 5.10
+// swift-tools-version: 6.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -30,6 +30,10 @@ let package = Package(
                 .product(name: "AppData", package: "AppData"),
                 .product(name: "SwiftyBeaver", package: "SwiftyBeaver"),
                 .product(name: "Alamofire", package: "Alamofire"),
+            ],
+            swiftSettings: [
+                .swiftLanguageMode(.v6),
+                .defaultIsolation(MainActor.self),
             ]
         ),
 

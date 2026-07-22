@@ -1,5 +1,4 @@
 //
-//  File.swift
 //  AppNetwork
 //
 //  Created by Avery on 2025/7/29.
@@ -10,7 +9,6 @@ import Alamofire
 import Logging
 
 public enum NetworkClient {
-    @MainActor
     public static var userToken: String?
 }
 
@@ -30,7 +28,6 @@ extension NetworkClient {
     /// 创建数据请求
     /// - Parameter target: 网络请求目标
     /// - Returns: Alamofire数据请求对象
-    @MainActor
     static func dataRequest<T: NetworkRequest>(for api: T) async throws(NetworkError) -> DataRequest? {
         let userToken = userToken
         if api.needAuthorization(), userToken?.isEmpty != false {
@@ -68,7 +65,6 @@ extension NetworkClient {
     /// 创建数据请求
     /// - Parameter target: 网络请求目标
     /// - Returns: Alamofire数据请求对象
-    @MainActor
     static func dataUpload<T: NetworkRequest>(for api: T) async throws(NetworkError) -> UploadRequest? {
         let userToken = userToken
         if api.needAuthorization(), userToken?.isEmpty != false {

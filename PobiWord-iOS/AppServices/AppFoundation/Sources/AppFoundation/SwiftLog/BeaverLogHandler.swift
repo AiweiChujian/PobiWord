@@ -9,7 +9,7 @@ import Foundation
 import Logging
 import SwiftyBeaver
 
-struct BeaverLogHandler: LogHandler{
+nonisolated struct BeaverLogHandler: LogHandler{
     let label: String
     var metadata: Logger.Metadata = [:]
     var logLevel: Logger.Level = .trace
